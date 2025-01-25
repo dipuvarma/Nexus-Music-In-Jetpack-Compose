@@ -1,5 +1,8 @@
 package com.player.music.mp3.presentation.ui.theme
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+
+
 
 val primaryLight = Color(0xFF435E91)
 val onPrimaryLight = Color(0xFFFFFFFF)
@@ -220,6 +223,8 @@ val surfaceContainerHighestDarkHighContrast = Color(0xFF45474C)
 
 
 
-
+val brush = Brush.linearGradient(
+    colors = listOf(primaryLight, onPrimaryLight )
+)
 
 

@@ -44,16 +44,3 @@ fun TitleAndMoreComp(
         )
     }
 }
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewComp() {
-    NexusMusicTheme() {
-        Surface {
-            TitleAndMoreComp(
-                title = "Title",
-                more = "More All"
-            )
-        }
-    }
-}

@@ -122,13 +122,3 @@ fun MusicBarComp(
     }
 }
 
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewComp() {
-    NexusMusicTheme() {
-        Surface {
-
-        }
-    }
-}

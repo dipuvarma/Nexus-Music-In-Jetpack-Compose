@@ -53,16 +53,3 @@ fun SliderComp(
     }
 }
 
-@Preview(showSystemUi = true)
-@Composable
-fun PreviewComp() {
-    NexusMusicTheme() {
-        Surface {
-            SliderComp(
-                image = R.drawable.placeholder_news,
-                title = "Title",
-                description = "Description"
-            )
-        }
-    }
-}

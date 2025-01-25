@@ -110,18 +110,3 @@ fun PopularSongComp(
 
 
 
-@Preview(showBackground = true)
-@Composable
-fun PreviewComp() {
-    NexusMusicTheme() {
-        Surface {
-            PopularSongComp(
-                modifier = Modifier.padding(8.dp),
-                songImage = R.drawable.placeholder_news,
-                songName = "Song Name",
-                artistName = "Artist Name",
-                icon = Icons.Default.ChevronRight,
-            )
-        }
-    }
-}

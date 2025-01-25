@@ -47,17 +47,4 @@ fun LogoWithText(
     }
 }
 
-@Preview(showSystemUi = true, device = Devices.PIXEL)
-@Composable
-fun PreviewComp() {
-    NexusMusicTheme(){
-        Surface {
-            LogoWithText(
-                modifier = Modifier
-                    .fillMaxSize(),
-                image = R.drawable.nexus_app_logo,
-                text = "Nexus Music"
-            )
-        }
-    }
-}
+

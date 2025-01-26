@@ -30,7 +30,7 @@ import com.player.music.mp3.presentation.ui.theme.NexusMusicTheme
 @Composable
 fun ProfileListComp(
     modifier: Modifier = Modifier,
-    image: ImageVector,
+    icon: ImageVector,
     title: String,
     subTitle: String,
     onClick: () -> Unit = {}
@@ -46,12 +46,12 @@ fun ProfileListComp(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
+                .padding(8.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Box(
                 modifier = Modifier
-                    .size(50.dp)
+                    .size(42.dp)
                     .background(
                         color = MaterialTheme.colorScheme.primary.copy(alpha = 0.2f),
                         shape = CircleShape
@@ -59,8 +59,8 @@ fun ProfileListComp(
                 contentAlignment = Alignment.Center
             ) {
                 Image(
-                    modifier = Modifier.size(30.dp),
-                    imageVector = image,
+                    modifier = Modifier.size(22.dp),
+                    imageVector = icon,
                     contentDescription = null,
                     colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.primary)
                 )

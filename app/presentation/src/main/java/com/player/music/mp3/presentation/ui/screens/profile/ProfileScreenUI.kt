@@ -14,8 +14,12 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Bookmark
+import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Interests
 import androidx.compose.material.icons.filled.PlaylistAdd
+import androidx.compose.material3.Button
+import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -43,7 +47,7 @@ fun ProfileScreenUI(modifier: Modifier = Modifier) {
             .background(
                 Brush.verticalGradient(
                     colors = listOf(
-                        MaterialTheme.colorScheme.primary.copy(alpha = 0.2f),
+                        MaterialTheme.colorScheme.primary.copy(alpha = 0.3f),
                         MaterialTheme.colorScheme.background
                     )
                 )
@@ -51,15 +55,15 @@ fun ProfileScreenUI(modifier: Modifier = Modifier) {
     ) {
         Column(
             modifier = Modifier
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .padding(vertical = 24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            //After Some Time Remove this spacer
-            Spacer(modifier = Modifier.height(50.dp))
+            Spacer(modifier = Modifier.height(10.dp))
             Surface(
                 modifier = Modifier
-                    .size(160.dp)
-                    .shadow(elevation = 8.dp, shape = CircleShape),
+                    .size(120.dp)
+                    .shadow(elevation = 10.dp, shape = CircleShape),
                 shape = CircleShape,
                 color = MaterialTheme.colorScheme.surface
             ) {
@@ -69,27 +73,26 @@ fun ProfileScreenUI(modifier: Modifier = Modifier) {
                     contentScale = ContentScale.Crop
                 )
             }
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(16.dp))
             Text(
                 text = "Dipu Verma",
                 style = MaterialTheme.typography.titleLarge.copy(
                     color = MaterialTheme.colorScheme.primary,
                     fontWeight = FontWeight.Bold,
-                    fontSize = 24.sp
+                    fontSize = 26.sp
                 ),
                 maxLines = 1
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = "It is a long established fact that a " +
-                        "reader will be distracted by the readable content.",
+                text = "It is a long established fact that a reader will be distracted by the readable content.",
                 style = MaterialTheme.typography.bodyMedium.copy(
                     color = MaterialTheme.colorScheme.onBackground,
                     fontWeight = FontWeight.Normal,
-                    lineHeight = 20.sp
+                    lineHeight = 22.sp
                 ),
                 modifier = Modifier
-                    .padding(horizontal = 32.dp)
+                    .padding(horizontal = 24.dp)
                     .align(Alignment.CenterHorizontally),
                 textAlign = TextAlign.Center,
                 maxLines = 3
@@ -99,7 +102,7 @@ fun ProfileScreenUI(modifier: Modifier = Modifier) {
         Surface(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 370.dp)
+                .padding(top = 300.dp)
                 .align(Alignment.BottomCenter),
             color = MaterialTheme.colorScheme.background,
             shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp)
@@ -107,7 +110,7 @@ fun ProfileScreenUI(modifier: Modifier = Modifier) {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(8.dp)
+                    .padding(16.dp)
             ) {
                 ProfileListComp(
                     icon = Icons.Default.PlaylistAdd,
@@ -116,24 +119,47 @@ fun ProfileScreenUI(modifier: Modifier = Modifier) {
                 )
                 ProfileListComp(
                     icon = Icons.Default.Bookmark,
-                    title = "Save you favorate song",
-                    subTitle = "Create a new playlist"
+                    title = "Bookmark Songs",
+                    subTitle = "Bookmark songs you love"
                 )
                 ProfileListComp(
                     icon = Icons.Default.Favorite,
-                    title = "Favorate",
-                    subTitle = "Create a new Favorate"
+                    title = "Favorite",
+                    subTitle = "View your favorite songs"
                 )
-
+                ProfileListComp(
+                    icon = Icons.Default.DarkMode,
+                    title = "Theme",
+                    subTitle = "Change your theme"
+                )
+                ProfileListComp(
+                    icon = Icons.Default.Interests,
+                    title = "Manage Interest",
+                    subTitle = "Change your song"
+                )
+                Button(
+                    onClick = {},
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp),
+                    shape = RoundedCornerShape(8.dp)
+                ) {
+                    Text(text = "Logout")
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+                Divider(
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+                    thickness = 1.dp
+                )
                 Box(
                     modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.BottomCenter
                 ) {
                     Text(
                         text = "App Version 1.0.0",
-                        style = MaterialTheme.typography.titleSmall.copy(
+                        style = MaterialTheme.typography.bodySmall.copy(
                             fontWeight = FontWeight.Normal,
-                            color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f)
+                            color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f)
                         )
                     )
                 }

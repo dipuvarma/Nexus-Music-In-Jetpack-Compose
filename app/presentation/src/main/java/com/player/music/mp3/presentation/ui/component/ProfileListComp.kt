@@ -46,7 +46,7 @@ fun ProfileListComp(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp),
+            .padding(8.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Box(
@@ -74,7 +74,8 @@ fun ProfileListComp(
                     style = MaterialTheme.typography.titleMedium.copy(
                         fontWeight = FontWeight.Bold,
                         color = MaterialTheme.colorScheme.onSurface
-                    )
+                    ),
+                    maxLines = 1
                 )
 
                 Spacer(modifier = Modifier.height(4.dp))
@@ -84,7 +85,8 @@ fun ProfileListComp(
                     style = MaterialTheme.typography.titleSmall.copy(
                         fontWeight = FontWeight.Normal,
                         color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
-                    )
+                    ),
+                    maxLines = 1
                 )
             }
         }

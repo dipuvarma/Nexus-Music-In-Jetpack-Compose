@@ -89,12 +89,3 @@ fun SongCategoryCardComp(
 }
 
 
-@Preview
-@Composable
-private fun PreviewComp() {
-    NexusMusicTheme() {
-        Surface {
-
-        }
-    }
-}

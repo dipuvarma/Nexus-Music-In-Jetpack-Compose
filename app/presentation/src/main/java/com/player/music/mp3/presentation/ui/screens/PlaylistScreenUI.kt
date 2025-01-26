@@ -220,13 +220,3 @@ fun MiddleDetailsText(
     }
 }
 
-
-@Preview(showBackground = true)
-@Composable
-private fun PreviewComp() {
-    NexusMusicTheme() {
-        Surface {
-            PlaylistScreenUI()
-        }
-    }
-}

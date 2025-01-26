@@ -1,4 +1,4 @@
-package com.player.music.mp3.presentation.ui.screens
+package com.player.music.mp3.presentation.ui.screens.playList
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -37,11 +37,9 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.player.music.mp3.presentation.R
 import com.player.music.mp3.presentation.ui.component.MusicBarComp
-import com.player.music.mp3.presentation.ui.theme.NexusMusicTheme
 
 @Composable
 fun PlaylistScreenUI(

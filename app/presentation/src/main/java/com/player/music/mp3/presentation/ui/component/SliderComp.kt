@@ -1,10 +1,13 @@
 package com.player.music.mp3.presentation.ui.component
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -23,13 +26,13 @@ import com.player.music.mp3.presentation.ui.theme.NexusMusicTheme
 @Composable
 fun SliderComp(
     modifier: Modifier = Modifier,
-    image:Int,
-    title:String,
-    description:String
+    image: Int,
+    title: String,
+    description: String
 ) {
     Column(modifier = modifier) {
         Image(
-            painter = painterResource(id =image),
+            painter = painterResource(id = image),
             contentDescription = null,
             modifier = Modifier
                 .fillMaxWidth()
@@ -40,16 +43,41 @@ fun SliderComp(
         Spacer(modifier = Modifier.height(16.dp))
         Text(
             text = title,
-            style = MaterialTheme.typography.titleLarge,
-            fontWeight = FontWeight.Bold,
+            style = MaterialTheme.typography.titleLarge.copy(
+                color = MaterialTheme.colorScheme.primary,
+                fontWeight = FontWeight.Bold,
+            ),
             maxLines = 2
         )
+        Spacer(modifier = Modifier.height(8.dp))
         Text(
             text = description,
-            style = MaterialTheme.typography.titleMedium,
-            fontWeight = FontWeight.Light,
+            style = MaterialTheme.typography.titleMedium.copy(
+                color = MaterialTheme.colorScheme.onBackground.copy(
+                    alpha = .6f
+                ),
+                fontWeight = FontWeight.Light,
+            ),
             maxLines = 3
         )
     }
 }
 
+@Preview(showBackground = true)
+@Composable
+private fun PreviewComp() {
+    NexusMusicTheme() {
+        Surface {
+            SliderComp(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(16.dp)
+                    .background(color = MaterialTheme.colorScheme.background),
+                image = R.drawable.placeholder_news,
+                title = "What is Lorem Ipsum?",
+                description = "It is a long established fact that a reader will be distracted " +
+                        "by the readable content of a page when looking at its layout. "
+            )
+        }
+    }
+}

@@ -9,7 +9,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import com.player.music.mp3.presentation.ui.screens.SplashScreenUI
+import com.player.music.mp3.presentation.ui.screens.intro.IntroScreenUI
+import com.player.music.mp3.presentation.ui.screens.splash.SplashScreenUI
 import com.player.music.mp3.presentation.ui.theme.NexusMusicTheme
 
 class MainActivity : ComponentActivity() {
@@ -20,7 +21,7 @@ class MainActivity : ComponentActivity() {
             NexusMusicTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Surface(modifier = Modifier.padding(innerPadding)) {
-                        SplashScreenUI()
+                        IntroScreenUI()
                     }
                 }
             }

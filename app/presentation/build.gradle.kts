@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    kotlin("plugin.serialization") version "2.1.0"
 }
 
 android {
@@ -50,8 +51,15 @@ dependencies {
 
     implementation(libs.androidx.material3)
     implementation(libs.material)
+
     implementation(libs.androidx.ui.text.google.fonts)
     implementation(libs.androidx.material.icons.extended.android)
+
+     //for Navigation
+    implementation(libs.androidx.navigation.compose)
+
+    /* For Serialization */
+    implementation(libs.kotlinx.serialization.json)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

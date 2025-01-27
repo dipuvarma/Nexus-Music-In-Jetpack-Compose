@@ -1,4 +1,4 @@
-package com.player.music.mp3.presentation.ui.screens.playList
+package com.player.music.mp3.presentation.screens.pages.playList
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -42,7 +42,7 @@ import com.player.music.mp3.presentation.R
 import com.player.music.mp3.presentation.ui.component.MusicBarComp
 
 @Composable
-fun PlaylistScreenUI(
+fun PlaylistScreen(
     modifier: Modifier = Modifier
 ) {
     Surface(

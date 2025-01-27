@@ -4,12 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
-import androidx.compose.ui.Modifier
-import com.player.music.mp3.presentation.ui.screens.profile.ProfileScreenUI
+import com.player.music.mp3.presentation.ui.nav.NexusMusicApp
 import com.player.music.mp3.presentation.ui.theme.NexusMusicTheme
 
 class MainActivity : ComponentActivity() {
@@ -18,10 +14,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             NexusMusicTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Surface(modifier = Modifier.padding(innerPadding)) {
-                        ProfileScreenUI()
-                    }
+                Surface() {
+                    NexusMusicApp()
                 }
             }
         }

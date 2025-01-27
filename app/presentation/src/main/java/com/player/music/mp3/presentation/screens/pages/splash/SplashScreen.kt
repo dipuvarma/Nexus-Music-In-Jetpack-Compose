@@ -1,4 +1,4 @@
-package com.player.music.mp3.presentation.ui.screens.splash
+package com.player.music.mp3.presentation.screens.pages.splash
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -11,7 +11,7 @@ import com.player.music.mp3.presentation.ui.component.LogoWithTextComp
 import com.player.music.mp3.presentation.R
 
 @Composable
-fun SplashScreenUI(modifier: Modifier = Modifier) {
+fun SplashScreen(modifier: Modifier = Modifier) {
     Box(
         modifier = Modifier
             .fillMaxSize()

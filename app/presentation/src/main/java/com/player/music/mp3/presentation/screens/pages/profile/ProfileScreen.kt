@@ -1,4 +1,4 @@
-package com.player.music.mp3.presentation.ui.screens.profile
+package com.player.music.mp3.presentation.screens.pages.profile
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -40,7 +40,7 @@ import com.player.music.mp3.presentation.ui.component.ProfileListComp
 import com.player.music.mp3.presentation.ui.theme.NexusMusicTheme
 
 @Composable
-fun ProfileScreenUI(modifier: Modifier = Modifier) {
+fun ProfileScreen(modifier: Modifier = Modifier) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -174,7 +174,7 @@ fun ProfileScreenUI(modifier: Modifier = Modifier) {
 private fun PreComp() {
     NexusMusicTheme {
         Surface {
-            ProfileScreenUI()
+
         }
     }
 }

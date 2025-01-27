@@ -1,4 +1,4 @@
-package com.player.music.mp3.presentation.ui.screens.intro
+package com.player.music.mp3.presentation.screens.pages.intro
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -26,7 +26,7 @@ import kotlin.math.absoluteValue
 
 
 @Composable
-fun IntroScreenUI(modifier: Modifier = Modifier) {
+fun IntroScreen(modifier: Modifier = Modifier) {
 
     val pagerState = rememberPagerState(
         pageCount = { sliderItems.size },

@@ -174,7 +174,7 @@ fun ProfileScreen(modifier: Modifier = Modifier) {
 private fun PreComp() {
     NexusMusicTheme {
         Surface {
-
+            ProfileScreen()
         }
     }
 }

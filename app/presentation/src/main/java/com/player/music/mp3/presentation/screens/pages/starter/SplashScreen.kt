@@ -1,5 +1,6 @@
 package com.player.music.mp3.presentation.screens.pages.starter
 
+import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,9 +13,9 @@ import com.player.music.mp3.presentation.ui.component.LogoWithTextComp
 import com.player.music.mp3.presentation.R
 
 @Composable
-fun SplashScreen() {
-
-    val context = LocalContext.current
+fun SplashScreen(
+    context: Context
+) {
 
     Box(
         modifier = Modifier

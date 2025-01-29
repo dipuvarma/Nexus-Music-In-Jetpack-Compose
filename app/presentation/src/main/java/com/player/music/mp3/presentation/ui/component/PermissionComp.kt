@@ -2,7 +2,6 @@ package com.player.music.mp3.presentation.ui.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,9 +13,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
+import androidx.compose.material.icons.outlined.RadioButtonUnchecked
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -26,35 +24,32 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.player.music.mp3.presentation.ui.theme.NexusMusicTheme
 
 @Composable
-fun ProfileListComp(
+fun PermissionComp(
     modifier: Modifier = Modifier,
+    onClick: () -> Unit,
     icon: ImageVector,
     title: String,
     subTitle: String,
-    onClick: () -> Unit = {}
 ) {
-    Card(
+    Surface(
         modifier = modifier
             .fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface
-        ),
-        onClick = { onClick.invoke() }
+        onClick = { onClick.invoke() },
+        tonalElevation = 4.dp,
+        shape = MaterialTheme.shapes.small
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-            .padding(8.dp),
-            verticalAlignment = Alignment.CenterVertically
+                .padding(horizontal = 8.dp, vertical = 12.dp),
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             Box(
                 modifier = Modifier
-                    .size(42.dp)
+                    .size(32.dp)
                     .background(
                         color = MaterialTheme.colorScheme.primary.copy(alpha = 0.2f),
                         shape = CircleShape
@@ -74,7 +69,7 @@ fun ProfileListComp(
             Column {
                 Text(
                     text = title,
-                    style = MaterialTheme.typography.titleMedium.copy(
+                    style = MaterialTheme.typography.titleSmall.copy(
                         fontWeight = FontWeight.Bold,
                         color = MaterialTheme.colorScheme.onSurface
                     ),
@@ -85,32 +80,19 @@ fun ProfileListComp(
 
                 Text(
                     text = subTitle,
-                    style = MaterialTheme.typography.titleSmall.copy(
+                    style = MaterialTheme.typography.bodySmall.copy(
                         fontWeight = FontWeight.Normal,
-                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
                     ),
                     maxLines = 1
                 )
             }
-        }
-    }
-}
-
-
-@Preview(showBackground = true)
-@Composable
-private fun PreviewComp() {
-    NexusMusicTheme() {
-        Surface {
-            ProfileListComp(
-                modifier = Modifier
-                    .padding(8.dp)
-                    .background(color = MaterialTheme.colorScheme.background),
-                icon = Icons.Default.Favorite,
-                title = "Song Name",
-                subTitle = "Artist Name"
+            Spacer(modifier = Modifier.weight(1f))
+            Icon(
+                imageVector = Icons.Outlined.RadioButtonUnchecked,
+                contentDescription = null,
+                modifier = Modifier.size(24.dp)
             )
         }
     }
 }
-

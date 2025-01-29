@@ -54,21 +54,20 @@ fun NexusMusicApp() {
                         TopAppBar(title = { Text(text = "Nexus App") })
                     }
                 }
-
                 else -> null
             }
         },
-        bottomBar = {},
-        snackbarHost = {}
     ) { innerPadding ->
         NavHost(
             navController = navController,
-            startDestination = Intro.route,
+            startDestination = Permission.route,
             modifier = Modifier.padding(innerPadding)
         ) {
 
             composable(Splash.route) {
-                SplashScreen()
+                SplashScreen(
+                    context = context
+                )
             }
 
             composable(Intro.route) {
@@ -81,7 +80,9 @@ fun NexusMusicApp() {
                 InterestScreen()
             }
             composable(Permission.route) {
-                PermissionScreen()
+                PermissionScreen(
+                    context = context
+                )
             }
             composable<Home> {
                 HomeScreen()

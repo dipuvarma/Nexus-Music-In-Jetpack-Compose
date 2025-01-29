@@ -13,5 +13,19 @@
     <string name="description_3">Description 3</string>
     <string name="description_4">Description 4</string>
 
+    <!--For Permission Screen-->
+    <string name="permission_title">Needs Permission</string>
+    <string name="permission_des">In order for you use certain features of this app, you need to give permissions. See description for you each permission</string>
+
+    <string name="storage">Storage</string>
+    <string name="storage_des">Allow to access your songs</string>
+
+    <string name="notification">Notification</string>
+    <string name="notification_des">Allow to send notifications</string>
+
+    <string name="btn_txt">Allow All Permissions</string>
+
+    <string name="permission_bottom_des">Permission are necessary for all features and functions to work properly. If not allowed, you have to enable permission in settings.</string>
+
 
 </resources>

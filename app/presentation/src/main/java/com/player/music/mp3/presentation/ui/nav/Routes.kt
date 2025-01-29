@@ -9,13 +9,19 @@ object Splash {
 }
 
 @Serializable
-object Intro
+object Intro {
+    const val route = "intro"
+}
 
 @Serializable
-object Interest
+object Interest {
+    const val route = "interest"
+}
 
 @Serializable
-object Permission
+object Permission {
+    const val route = "permission"
+}
 
 @Serializable
 object Home

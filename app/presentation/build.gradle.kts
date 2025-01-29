@@ -61,6 +61,9 @@ dependencies {
     /* For Serialization */
     implementation(libs.kotlinx.serialization.json)
 
+    /*For Coil*/
+    implementation(libs.coil.compose)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

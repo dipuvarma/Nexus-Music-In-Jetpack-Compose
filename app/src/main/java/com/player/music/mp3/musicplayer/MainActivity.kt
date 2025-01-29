@@ -13,7 +13,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            NexusMusicTheme {
+            NexusMusicTheme(dynamicColor = false) {
                 Surface() {
                     NexusMusicApp()
                 }
@@ -21,4 +21,5 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
 

@@ -1,4 +1,4 @@
-package com.player.music.mp3.presentation.screens.pages.splash
+package com.player.music.mp3.presentation.screens.pages.starter
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -7,11 +7,15 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import com.player.music.mp3.presentation.ui.component.LogoWithTextComp
 import com.player.music.mp3.presentation.R
 
 @Composable
-fun SplashScreen(modifier: Modifier = Modifier) {
+fun SplashScreen() {
+
+    val context = LocalContext.current
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -20,7 +24,7 @@ fun SplashScreen(modifier: Modifier = Modifier) {
     ) {
         LogoWithTextComp(
             image = R.drawable.nexus_app_logo,
-            text = "Nexus Music"
+            text = context.getString(R.string.app_name)
         )
     }
 }

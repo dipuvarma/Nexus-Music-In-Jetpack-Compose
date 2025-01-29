@@ -20,6 +20,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil3.compose.AsyncImage
 import com.player.music.mp3.presentation.R
 import com.player.music.mp3.presentation.ui.theme.NexusMusicTheme
 
@@ -31,12 +32,12 @@ fun SliderComp(
     description: String
 ) {
     Column(modifier = modifier) {
-        Image(
-            painter = painterResource(id = image),
+        AsyncImage(
+            model = image,
             contentDescription = null,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(350.dp)
+                .height(320.dp)
                 .clip(RoundedCornerShape(16.dp)),
             contentScale = ContentScale.Crop
         )
@@ -47,9 +48,8 @@ fun SliderComp(
                 color = MaterialTheme.colorScheme.primary,
                 fontWeight = FontWeight.Bold,
             ),
-            maxLines = 2
+            maxLines = 1
         )
-        Spacer(modifier = Modifier.height(8.dp))
         Text(
             text = description,
             style = MaterialTheme.typography.titleMedium.copy(
@@ -71,7 +71,6 @@ private fun PreviewComp() {
             SliderComp(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(16.dp)
                     .background(color = MaterialTheme.colorScheme.background),
                 image = R.drawable.placeholder_news,
                 title = "What is Lorem Ipsum?",

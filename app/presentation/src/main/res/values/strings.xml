@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Nexus Music</string>
+
+    <!-- Intro Screen Content-->
+    <string name="title_1">Tile 1</string>
+    <string name="title_2">Tile 2</string>
+    <string name="title_3">Tile 3</string>
+    <string name="title_4">Tile 4</string>
+
+
+    <string name="description_1">Description 1</string>
+    <string name="description_2">Description 2</string>
+    <string name="description_3">Description 3</string>
+    <string name="description_4">Description 4</string>
+
+
 </resources>

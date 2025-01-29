@@ -1,4 +1,4 @@
-package com.player.music.mp3.presentation.screens.pages.profile
+package com.player.music.mp3.presentation.screens.pages.other.profile
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

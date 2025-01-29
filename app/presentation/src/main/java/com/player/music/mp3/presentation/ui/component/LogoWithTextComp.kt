@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import coil3.compose.AsyncImage
 
 
 @Composable
@@ -27,10 +28,10 @@ fun LogoWithTextComp(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Image(
+        AsyncImage(
             modifier = Modifier.size(70.dp),
-            painter = painterResource(id = image),
-            contentDescription = null
+            model = image,
+            contentDescription = null,
         )
         Spacer(modifier = Modifier.height(16.dp))
         Text(

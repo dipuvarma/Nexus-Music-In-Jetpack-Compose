@@ -1,6 +1,7 @@
 package com.player.music.mp3.presentation.ui.nav
 
-import androidx.compose.animation.core.snap
+import android.icu.text.CaseMap
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -9,49 +10,77 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.player.music.mp3.presentation.screens.pages.FavouriteScreen
-import com.player.music.mp3.presentation.screens.pages.HomeScreen
-import com.player.music.mp3.presentation.screens.pages.InterestScreen
-import com.player.music.mp3.presentation.screens.pages.MusicEqScreen
-import com.player.music.mp3.presentation.screens.pages.MusicPlayerScreen
-import com.player.music.mp3.presentation.screens.pages.PermissionScreen
-import com.player.music.mp3.presentation.screens.pages.ProfileScreen
-import com.player.music.mp3.presentation.screens.pages.SearchScreen
-import com.player.music.mp3.presentation.screens.pages.SettingScreen
-import com.player.music.mp3.presentation.screens.pages.intro.IntroScreen
-import com.player.music.mp3.presentation.screens.pages.playList.PlaylistScreen
-import com.player.music.mp3.presentation.screens.pages.splash.SplashScreen
+import com.player.music.mp3.presentation.screens.pages.main.FavouriteScreen
+import com.player.music.mp3.presentation.screens.pages.main.HomeScreen
+import com.player.music.mp3.presentation.screens.pages.starter.InterestScreen
+import com.player.music.mp3.presentation.screens.pages.other.MusicEqScreen
+import com.player.music.mp3.presentation.screens.pages.other.MusicPlayerScreen
+import com.player.music.mp3.presentation.screens.pages.starter.PermissionScreen
+import com.player.music.mp3.presentation.screens.pages.main.ProfileScreen
+import com.player.music.mp3.presentation.screens.pages.main.SearchScreen
+import com.player.music.mp3.presentation.screens.pages.other.SettingScreen
+import com.player.music.mp3.presentation.screens.pages.starter.IntroScreen
+import com.player.music.mp3.presentation.screens.pages.other.playList.PlaylistScreen
+import com.player.music.mp3.presentation.screens.pages.starter.SplashScreen
+import com.player.music.mp3.presentation.screens.state.AppVM
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NexusMusicApp() {
 
+    val context = LocalContext.current
+
+    /*Shared ViewModel */
+    val appViewModel = viewModel<AppVM>()
+
+    /*Navigation Controller*/
     val navController = rememberNavController()
+
+    val currentBackStackEntry = navController.currentBackStackEntryAsState().value
+    val currentDestination = currentBackStackEntry?.destination?.route
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        topBar = {},
+        topBar = {
+            when (currentDestination) {
+                Splash.route, Intro.route, Interest.route, Permission.route -> {
+                    AnimatedVisibility(false) {
+                        TopAppBar(title = { Text(text = "Nexus App") })
+                    }
+                }
+
+                else -> null
+            }
+        },
         bottomBar = {},
         snackbarHost = {}
     ) { innerPadding ->
         NavHost(
             navController = navController,
-            startDestination = Intro,
+            startDestination = Intro.route,
             modifier = Modifier.padding(innerPadding)
         ) {
-            composable<Splash> {
+
+            composable(Splash.route) {
                 SplashScreen()
             }
-            composable<Intro> {
-                IntroScreen()
+
+            composable(Intro.route) {
+                IntroScreen(
+                    viewModel = appViewModel,
+                    context = context
+                )
             }
-            composable<Interest> {
+            composable(Interest.route) {
                 InterestScreen()
             }
-            composable<Permission> {
+            composable(Permission.route) {
                 PermissionScreen()
             }
             composable<Home> {

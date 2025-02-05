@@ -79,7 +79,6 @@ fun ProfileScreen(modifier: Modifier = Modifier) {
                 style = MaterialTheme.typography.titleLarge.copy(
                     color = MaterialTheme.colorScheme.primary,
                     fontWeight = FontWeight.Bold,
-                    fontSize = 26.sp
                 ),
                 maxLines = 1
             )

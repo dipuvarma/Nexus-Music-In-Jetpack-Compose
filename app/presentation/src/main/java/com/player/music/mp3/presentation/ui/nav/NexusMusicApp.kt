@@ -1,6 +1,5 @@
 package com.player.music.mp3.presentation.ui.nav
 
-import android.icu.text.CaseMap
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -18,17 +17,18 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.player.music.mp3.presentation.screens.pages.main.FavouriteScreen
 import com.player.music.mp3.presentation.screens.pages.main.HomeScreen
-import com.player.music.mp3.presentation.screens.pages.starter.InterestScreen
-import com.player.music.mp3.presentation.screens.pages.other.MusicEqScreen
-import com.player.music.mp3.presentation.screens.pages.other.MusicPlayerScreen
-import com.player.music.mp3.presentation.screens.pages.starter.PermissionScreen
 import com.player.music.mp3.presentation.screens.pages.main.ProfileScreen
 import com.player.music.mp3.presentation.screens.pages.main.SearchScreen
+import com.player.music.mp3.presentation.screens.pages.other.MusicEqScreen
+import com.player.music.mp3.presentation.screens.pages.other.MusicPlayerScreen
 import com.player.music.mp3.presentation.screens.pages.other.SettingScreen
-import com.player.music.mp3.presentation.screens.pages.starter.IntroScreen
 import com.player.music.mp3.presentation.screens.pages.other.playList.PlaylistScreen
+import com.player.music.mp3.presentation.screens.pages.starter.InterestScreen
+import com.player.music.mp3.presentation.screens.pages.starter.IntroScreen
+import com.player.music.mp3.presentation.screens.pages.starter.PermissionScreen
 import com.player.music.mp3.presentation.screens.pages.starter.SplashScreen
 import com.player.music.mp3.presentation.screens.state.AppVM
+import com.player.music.mp3.presentation.screens.state.MusicVM
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -38,6 +38,7 @@ fun NexusMusicApp() {
 
     /*Shared ViewModel */
     val appViewModel = viewModel<AppVM>()
+    val musicViewModel = viewModel<MusicVM>()
 
     /*Navigation Controller*/
     val navController = rememberNavController()
@@ -54,13 +55,14 @@ fun NexusMusicApp() {
                         TopAppBar(title = { Text(text = "Nexus App") })
                     }
                 }
+
                 else -> null
             }
         },
     ) { innerPadding ->
         NavHost(
             navController = navController,
-            startDestination = Permission.route,
+            startDestination = MusicPlayer,
             modifier = Modifier.padding(innerPadding)
         ) {
 
@@ -103,7 +105,10 @@ fun NexusMusicApp() {
                 PlaylistScreen()
             }
             composable<MusicPlayer> {
-                MusicPlayerScreen()
+                MusicPlayerScreen(
+                    context = context,
+                    musicVM = musicViewModel
+                )
             }
             composable<MusicEq> {
                 MusicEqScreen()

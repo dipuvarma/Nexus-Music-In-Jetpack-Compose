@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+    id("kotlin-android")
 
 }
 
@@ -55,9 +56,6 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
 
     implementation(libs.androidx.material3)
-
-    implementation(project(":app:presentation"))
-
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -66,25 +64,15 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    //For RoomDatabase
 
-    implementation(libs.androidx.room.runtime)
-    kapt(libs.androidx.room.compiler)
-    implementation(libs.androidx.work.runtime)
-
-    //For Dragger Hilt
+    //For Dagger Hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
-
+    implementation(project(":app:presentation"))
 
      //for Navigation
     implementation(libs.androidx.navigation.compose)
 
-    //For Retrofit
-    implementation (libs.retrofit)
-    implementation (libs.converter.gson)
     implementation(libs.androidx.ui.text.google.fonts)
-
-
 
 }

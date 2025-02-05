@@ -1,9 +1,9 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
+    id("kotlin-android")
 }
 
 android {
@@ -41,19 +41,17 @@ dependencies {
     kapt(libs.hilt.android.compiler)
 
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
-    /*
-  * Database
-  * */
 
+    /* Database*/
     implementation(libs.androidx.room.runtime)
     kapt(libs.androidx.room.compiler)
     implementation(libs.androidx.work.runtime)
+    implementation(libs.androidx.room.ktx)
 
 
     /*Retrofit*/
     implementation (libs.retrofit)
     implementation (libs.converter.gson)
-
 
 
     implementation(libs.androidx.core.ktx)

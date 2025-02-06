@@ -16,7 +16,6 @@ import com.player.music.mp3.presentation.R
 fun SplashScreen(
     context: Context
 ) {
-
     Box(
         modifier = Modifier
             .fillMaxSize()

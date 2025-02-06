@@ -3,6 +3,7 @@ package com.player.music.mp3.presentation.screens.pages.starter
 import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -30,12 +31,15 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.player.music.mp3.presentation.R
 import com.player.music.mp3.presentation.ui.component.PermissionComp
+import com.player.music.mp3.presentation.ui.nav.Interest
 
 @Composable
 fun PermissionScreen(
-context: Context
+context: Context,
+navController: NavController,
 ) {
     Column(
         modifier = Modifier
@@ -63,7 +67,14 @@ context: Context
                     .background(
                         color = MaterialTheme.colorScheme.primary.copy(alpha = 0.2f),
                         shape = CircleShape
-                    ),
+                    )
+                    .clickable(onClick = {
+                        navController.navigate(Interest.route){
+                            popUpTo(Interest.route){
+                                inclusive = true
+                            }
+                        }
+                    }),
                 contentAlignment = Alignment.Center
             ) {
                 Image(
@@ -120,7 +131,8 @@ context: Context
         )
         Spacer(Modifier.weight(1f))
         OutlinedButton(
-            onClick = {},
+            onClick = {
+            },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(50.dp)

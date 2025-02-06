@@ -223,8 +223,3 @@ val surfaceContainerHighestDarkHighContrast = Color(0xFF45474C)
 
 
 
-val brush = Brush.linearGradient(
-    colors = listOf(primaryLight, onPrimaryLight )
-)
-
-

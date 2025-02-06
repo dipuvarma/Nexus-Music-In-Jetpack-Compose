@@ -24,16 +24,24 @@ object Permission {
 }
 
 @Serializable
-object Home
+object Home {
+    const val route = "home"
+}
 
 @Serializable
-object Search
+object Search {
+    const val route = "search"
+}
 
 @Serializable
-object Favourite
+object Favourite{
+    const val route = "favourite"
+}
 
 @Serializable
-object Profile
+object Profile{
+    const val route = "profile"
+}
 
 @Serializable
 object Settings

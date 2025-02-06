@@ -3,11 +3,15 @@ package com.player.music.mp3.presentation.ui.nav
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -29,6 +33,8 @@ import com.player.music.mp3.presentation.screens.pages.starter.PermissionScreen
 import com.player.music.mp3.presentation.screens.pages.starter.SplashScreen
 import com.player.music.mp3.presentation.screens.state.AppVM
 import com.player.music.mp3.presentation.screens.state.MusicVM
+import com.player.music.mp3.presentation.ui.component.bottom.CustomBottomBar
+import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -59,10 +65,21 @@ fun NexusMusicApp() {
                 else -> null
             }
         },
+        bottomBar = {
+            when (currentDestination) {
+                Home.route, Search.route, Favourite.route, Profile.route -> {
+                    CustomBottomBar(
+                        currentDestination = currentDestination,
+                        appViewModel = appViewModel,
+                        navController = navController
+
+                }
+            }
+        }
     ) { innerPadding ->
         NavHost(
             navController = navController,
-            startDestination = MusicPlayer,
+            startDestination = Home.route,
             modifier = Modifier.padding(innerPadding)
         ) {
 
@@ -70,32 +87,45 @@ fun NexusMusicApp() {
                 SplashScreen(
                     context = context
                 )
+                LaunchedEffect(Unit) {
+                    delay(2000)
+                    navController.navigate(Intro.route) {
+                        popUpTo(Splash.route) {
+                            inclusive = true
+                        }
+                    }
+                }
             }
 
             composable(Intro.route) {
                 IntroScreen(
                     viewModel = appViewModel,
-                    context = context
+                    context = context,
+                    navController = navController
                 )
             }
             composable(Interest.route) {
-                InterestScreen()
+                InterestScreen(
+                    appVM = appViewModel,
+                    navController = navController
+                )
             }
             composable(Permission.route) {
                 PermissionScreen(
-                    context = context
+                    context = context,
+                    navController = navController
                 )
             }
-            composable<Home> {
+            composable(Home.route) {
                 HomeScreen()
             }
-            composable<Search> {
+            composable(Search.route) {
                 SearchScreen()
             }
-            composable<Favourite> {
+            composable(Favourite.route) {
                 FavouriteScreen()
             }
-            composable<Profile> {
+            composable(Profile.route) {
                 ProfileScreen()
             }
             composable<Settings> {

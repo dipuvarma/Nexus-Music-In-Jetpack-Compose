@@ -72,7 +72,7 @@ fun NexusMusicApp() {
                         currentDestination = currentDestination,
                         appViewModel = appViewModel,
                         navController = navController
-
+                    )
                 }
             }
         }

@@ -14,6 +14,7 @@ import com.player.data.utils.response.doOnLoading
 import com.player.data.utils.response.doOnSuccess
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -29,6 +30,7 @@ class MusicVM @Inject constructor(
     private val _songListState = MutableStateFlow<List<OfflineAudioTable>>(emptyList())
     val songListState = _songListState.asStateFlow()
 
+
     /*Exo Player*/
     private var _isPlaying = MutableStateFlow(false)
     val isPlayingState = _isPlaying.asStateFlow()
@@ -38,15 +40,17 @@ class MusicVM @Inject constructor(
     fun nextSong() = player.seekToNext()
     fun previousSong() = player.seekToPrevious()
 
-    fun startSong(songUri: String): String {
+
+    fun startPlaylistSong(songUris: List<String>, startIndex: Int) {
         viewModelScope.launch {
+            val mediaItems = songUris.map { MediaItem.fromUri(it) }
             player.apply {
-                setMediaItem(MediaItem.fromUri(songUri))
+                setMediaItems(mediaItems, startIndex, 0L) // Start from the clicked song
                 prepare()
             }
         }
-        return songUri
     }
+
 
 
     init {
@@ -64,6 +68,7 @@ class MusicVM @Inject constructor(
                     }
 
                     Player.STATE_ENDED -> {
+                        player.seekToNext()
                         Log.e("onPlaybackStateChanged", "State_Ended")
 
                     }
@@ -80,7 +85,6 @@ class MusicVM @Inject constructor(
                 _isPlaying.value = isPlaying
             }
         })
-
         getMusic()
     }
 
@@ -103,6 +107,4 @@ class MusicVM @Inject constructor(
             }.collect()
         }
     }
-
-
 }

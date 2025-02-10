@@ -1,28 +1,21 @@
 package com.player.music.mp3.presentation.ui.component
 
-import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.RepeatMode
-import androidx.compose.animation.core.animateFloat
-import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.rememberInfiniteTransition
-import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.PauseCircle
 import androidx.compose.material.icons.filled.PlayCircle
 import androidx.compose.material.icons.outlined.FavoriteBorder
@@ -31,20 +24,17 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import coil3.compose.AsyncImage
 
 @Composable
-fun MiniPlayerBarComp(
+fun MusicPlayerBarComp(
     modifier: Modifier = Modifier,
     image: Int,
     title: String,
@@ -52,22 +42,9 @@ fun MiniPlayerBarComp(
     isFavorite: Boolean,
     isPlaying: Boolean,
     onPlayPauseClick: () -> Unit,
-    onSurfaceClick: () -> Unit,
     onFavoriteClick: () -> Unit = {},
+    onMoreOptionsClick: () -> Unit = {}
 ) {
-    val interactionSource = remember { MutableInteractionSource() }
-    val infiniteTransition = rememberInfiniteTransition()
-
-    // Animate horizontal scrolling for subtitle
-    val translateX by infiniteTransition.animateFloat(
-        initialValue = 0f,
-        targetValue = -200f, // Adjust based on text width
-        animationSpec = infiniteRepeatable(
-            animation = tween(durationMillis = 6000, easing = LinearEasing),
-            repeatMode = RepeatMode.Restart
-        )
-    )
-
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -76,22 +53,16 @@ fun MiniPlayerBarComp(
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Row(
-            modifier = Modifier
-                .padding(8.dp)
-                .weight(.4f)
-                .clickable(
-                    interactionSource = interactionSource,
-                    indication = null, // Removes ripple effect
-                    onClick = onSurfaceClick
-                ),
+            modifier = Modifier.padding(8.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            AsyncImage(
-                model = image,
+            Image(
+                painter = painterResource(id = image),
                 contentDescription = null,
                 modifier = Modifier
                     .size(48.dp)
-                    .clip(RoundedCornerShape(8.dp)),
+                    .clip(CircleShape)
+                    .border(1.dp, MaterialTheme.colorScheme.primary, CircleShape),
                 contentScale = ContentScale.Crop
             )
             Spacer(modifier = Modifier.width(12.dp))
@@ -108,31 +79,25 @@ fun MiniPlayerBarComp(
                     overflow = TextOverflow.Ellipsis
                 )
                 Spacer(modifier = Modifier.height(2.dp))
-
-                // Clipping the scrolling text inside a fixed width box
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth() // Set max width for scrolling
-                        .height(16.dp) // Ensure text doesn't overflow vertically
-                        .clip(RectangleShape)
-                        .background(MaterialTheme.colorScheme.surface)
-                        .padding(start = 4.dp) // Adjust padding if needed
-                ) {
-                    Text(
-                        text = subTitle,
-                        style = MaterialTheme.typography.bodySmall.copy(
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        ),
-                        modifier = Modifier
-                            .offset(x = translateX.dp) // Moves text leftward
-                    )
-                }
+                Text(
+                    text = subTitle,
+                    style = MaterialTheme.typography.bodySmall.copy(
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    ),
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
             }
         }
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
-            IconButton(onClick = onPlayPauseClick) {
+            IconButton(
+                onClick = {
+                    onPlayPauseClick()
+                    isPlaying == true
+                }
+            ) {
                 Icon(
                     modifier = Modifier.size(57.dp),
                     imageVector = if (isPlaying) Icons.Filled.PauseCircle else Icons.Filled.PlayCircle,
@@ -140,17 +105,20 @@ fun MiniPlayerBarComp(
                     tint = MaterialTheme.colorScheme.primary
                 )
             }
-            IconButton(onClick = onFavoriteClick) {
+            IconButton(onClick = { onFavoriteClick() }) {
                 Icon(
                     imageVector = if (isFavorite) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
                     contentDescription = if (isFavorite) "Unfavorite" else "Favorite",
                     tint = if (isFavorite) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
+            IconButton(onClick = { onMoreOptionsClick() }) {
+                Icon(
+                    imageVector = Icons.Filled.MoreVert,
+                    contentDescription = "More options",
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
         }
     }
 }
-
-
-
-

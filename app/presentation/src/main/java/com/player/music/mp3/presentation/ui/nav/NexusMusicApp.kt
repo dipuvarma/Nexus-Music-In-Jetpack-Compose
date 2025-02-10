@@ -1,7 +1,5 @@
 package com.player.music.mp3.presentation.ui.nav
 
-import android.annotation.SuppressLint
-import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,11 +10,11 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.runtime.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.*
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -25,10 +23,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.player.core.database.table.OfflineAudioTable
+import com.player.music.mp3.presentation.R
 import com.player.music.mp3.presentation.screens.pages.main.FavouriteScreen
 import com.player.music.mp3.presentation.screens.pages.main.HomeScreen
 import com.player.music.mp3.presentation.screens.pages.main.ProfileScreen
 import com.player.music.mp3.presentation.screens.pages.main.SearchScreen
+import com.player.music.mp3.presentation.screens.pages.other.AllSongScreen
 import com.player.music.mp3.presentation.screens.pages.other.MusicEqScreen
 import com.player.music.mp3.presentation.screens.pages.other.MusicPlayerScreen
 import com.player.music.mp3.presentation.screens.pages.other.SettingScreen
@@ -43,8 +44,6 @@ import com.player.music.mp3.presentation.ui.component.MiniPlayerBarComp
 import com.player.music.mp3.presentation.ui.component.bottom.CustomBottomBar
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import com.player.music.mp3.presentation.R
-import com.player.music.mp3.presentation.screens.pages.other.AllSongScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -93,12 +92,12 @@ fun NexusMusicApp() {
                     Column(
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        if (hasBeenPlayed){
+                        if (hasBeenPlayed) {
                             HorizontalDivider()
                             MiniPlayerBarComp(
                                 image = R.drawable.placeholder_news,
-                                title = "Title",
-                                subTitle = "Sub Title",
+                                title = "Jeeto Baazi Khel Ke",
+                                subTitle = "ICC Men's Champions Trophy 2025. ICC Men's Champions ",
                                 isFavorite = false,
                                 isPlaying = isPlaying,
                                 onPlayPauseClick = {
@@ -108,6 +107,15 @@ fun NexusMusicApp() {
                                         musicViewModel.playSong()
                                     }
                                 },
+                                onSurfaceClick = {
+                                    scope.launch {
+                                        navController.navigate(MusicPlayer) {
+                                            popUpTo(MusicPlayer) {
+                                                inclusive = true
+                                            }
+                                        }
+                                    }
+                                }
                             )
                             HorizontalDivider()
                         }
@@ -202,7 +210,25 @@ fun NexusMusicApp() {
                 )
             }
             composable<MusicPlayer> {
-                MusicPlayerScreen()
+                MusicPlayerScreen(
+                    songImage = R.drawable.placeholder_news,
+                    songName = "Champions Trophy 2025",
+                    artistName = "ICC Men's Champions Trophy 2025. ICC Men's Champions ",
+                    isPlaying = isPlaying,
+                    onPlayPauseClick = {
+                        if (isPlaying) {
+                            musicViewModel.pauseSong()
+                        } else {
+                            musicViewModel.playSong()
+                        }
+                    },
+                    onPreviousClick = {
+                        musicViewModel.previousSong()
+                    },
+                    onNextClick = {
+                        musicViewModel.nextSong()
+                    }
+                )
             }
             composable<MusicEq> {
                 MusicEqScreen()

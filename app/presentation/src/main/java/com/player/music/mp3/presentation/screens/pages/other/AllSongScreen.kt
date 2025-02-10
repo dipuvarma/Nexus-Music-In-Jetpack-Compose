@@ -20,12 +20,14 @@ fun AllSongScreen(
     musicVM: MusicVM
 ) {
     val songList = musicVM.songListState.collectAsState().value
-    var isPlaying = musicVM.isPlayingState.collectAsState().value
 
     MusicBarList(
         songList = songList,
-        onClick = {
-            isPlaying = musicVM.startSong(it) == it
+        onClick = {clickedSongPath->
+            val startIndex = songList.indexOfFirst { it.path == clickedSongPath }
+            if (startIndex != -1) {
+                musicVM.startPlaylistSong(songList.map { it.path }, startIndex)
+            }
         }
     )
 }

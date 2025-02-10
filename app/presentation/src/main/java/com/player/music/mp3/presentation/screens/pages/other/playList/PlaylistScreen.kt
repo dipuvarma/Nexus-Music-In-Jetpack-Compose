@@ -39,11 +39,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.player.music.mp3.presentation.R
-import com.player.music.mp3.presentation.ui.component.MusicBarComp
+import com.player.music.mp3.presentation.screens.state.MusicVM
+import com.player.music.mp3.presentation.ui.component.MiniPlayerBarComp
 
 @Composable
 fun PlaylistScreen(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    musicVM: MusicVM
 ) {
     Surface(
         modifier = Modifier.fillMaxSize()
@@ -112,18 +114,18 @@ fun PlaylistScreen(
                 onMoreClick = {}
             )
             Spacer(Modifier.height(16.dp))
-            LazyColumn {
-                items(10){
-                    MusicBarComp(
-                        modifier = Modifier.padding(8.dp),
-                        image = R.drawable.placeholder_news,
-                        title = "Song Name",
-                        subTitle = "Artist Name",
-                        isPlaying = true,
-                        isFavorite = false,
-                    )
-                }
-            }
+//            LazyColumn {
+//                items(10) {
+//                    MiniPlayerBarComp(
+//                        modifier = Modifier.padding(8.dp),
+//                        image = R.drawable.placeholder_news,
+//                        title = "Song Name",
+//                        subTitle = "Artist Name",
+//                        isPlaying = musicVM.isPlayingState,
+//                        isFavorite = false,
+//                    )
+//                }
+//            }
         }
     }
 }

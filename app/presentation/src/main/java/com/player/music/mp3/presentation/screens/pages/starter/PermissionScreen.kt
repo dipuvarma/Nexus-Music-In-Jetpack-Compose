@@ -38,8 +38,8 @@ import com.player.music.mp3.presentation.ui.nav.Interest
 
 @Composable
 fun PermissionScreen(
-context: Context,
-navController: NavController,
+    context: Context,
+    onClick: () -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -56,9 +56,9 @@ navController: NavController,
             Text(
                 text = context.getString(R.string.permission_title),
                 style = MaterialTheme.typography.headlineSmall.copy(
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onSurface
-                    ),
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSurface
+                ),
                 maxLines = 1
             )
             Box(
@@ -68,13 +68,7 @@ navController: NavController,
                         color = MaterialTheme.colorScheme.primary.copy(alpha = 0.2f),
                         shape = CircleShape
                     )
-                    .clickable(onClick = {
-                        navController.navigate(Interest.route){
-                            popUpTo(Interest.route){
-                                inclusive = true
-                            }
-                        }
-                    }),
+                    .clickable(onClick = { onClick }),
                 contentAlignment = Alignment.Center
             ) {
                 Image(

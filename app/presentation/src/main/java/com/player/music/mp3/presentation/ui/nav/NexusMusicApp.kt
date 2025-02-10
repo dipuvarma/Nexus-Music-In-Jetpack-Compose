@@ -1,17 +1,21 @@
 package com.player.music.mp3.presentation.ui.nav
 
+import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -33,8 +37,12 @@ import com.player.music.mp3.presentation.screens.pages.starter.PermissionScreen
 import com.player.music.mp3.presentation.screens.pages.starter.SplashScreen
 import com.player.music.mp3.presentation.screens.state.AppVM
 import com.player.music.mp3.presentation.screens.state.MusicVM
+import com.player.music.mp3.presentation.ui.component.MiniPlayerBarComp
 import com.player.music.mp3.presentation.ui.component.bottom.CustomBottomBar
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import com.player.music.mp3.presentation.R
+import com.player.music.mp3.presentation.screens.pages.other.AllSongScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -49,8 +57,13 @@ fun NexusMusicApp() {
     /*Navigation Controller*/
     val navController = rememberNavController()
 
+    val scope = rememberCoroutineScope()
+
     val currentBackStackEntry = navController.currentBackStackEntryAsState().value
     val currentDestination = currentBackStackEntry?.destination?.route
+
+    /*Player State*/
+    var isPlaying = musicViewModel.isPlayingState.collectAsState().value
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -67,12 +80,32 @@ fun NexusMusicApp() {
         },
         bottomBar = {
             when (currentDestination) {
-                Home.route, Search.route, Favourite.route, Profile.route -> {
-                    CustomBottomBar(
-                        currentDestination = currentDestination,
-                        appViewModel = appViewModel,
-                        navController = navController
-                    )
+                Home.route, Search.route, AllSong.route, Favourite.route, Profile.route -> {
+                    Column(
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        HorizontalDivider()
+                        MiniPlayerBarComp(
+                            image = R.drawable.placeholder_news,
+                            title = "Title",
+                            subTitle = "Sub Title",
+                            isFavorite = false,
+                            isPlaying = isPlaying,
+                            onPlayPauseClick = {
+                                if (isPlaying) {
+                                    musicViewModel.pauseSong()
+                                } else {
+                                    musicViewModel.playSong()
+                                }
+                            },
+                        )
+                        HorizontalDivider()
+                        CustomBottomBar(
+                            currentDestination = currentDestination,
+                            appViewModel = appViewModel,
+                            navController = navController
+                        )
+                    }
                 }
             }
         }
@@ -113,15 +146,36 @@ fun NexusMusicApp() {
             composable(Permission.route) {
                 PermissionScreen(
                     context = context,
-                    navController = navController
+                    onClick = {
+                        scope.launch {
+                            navController.navigate(Interest.route) {
+                                popUpTo(Interest.route) {
+                                    inclusive = true
+                                }
+                            }
+                        }
+                    }
                 )
             }
+
             composable(Home.route) {
-                HomeScreen()
+                HomeScreen(
+                    onClick = {
+                        scope.launch {
+                            navController.navigate(Search.route)
+                        }
+                    }
+                )
             }
             composable(Search.route) {
                 SearchScreen()
             }
+            composable(AllSong.route) {
+                AllSongScreen(
+                    musicVM = musicViewModel
+                )
+            }
+
             composable(Favourite.route) {
                 FavouriteScreen()
             }
@@ -132,13 +186,12 @@ fun NexusMusicApp() {
                 SettingScreen()
             }
             composable<Playlist> {
-                PlaylistScreen()
-            }
-            composable<MusicPlayer> {
-                MusicPlayerScreen(
-                    context = context,
+                PlaylistScreen(
                     musicVM = musicViewModel
                 )
+            }
+            composable<MusicPlayer> {
+                MusicPlayerScreen()
             }
             composable<MusicEq> {
                 MusicEqScreen()

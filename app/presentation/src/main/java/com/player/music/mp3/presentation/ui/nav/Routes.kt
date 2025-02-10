@@ -44,6 +44,11 @@ object Profile{
 }
 
 @Serializable
+object AllSong{
+    const val route = "all_Song"
+}
+
+@Serializable
 object Settings
 
 @Serializable

@@ -4,11 +4,13 @@ import android.content.Context
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.LibraryMusic
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.LibraryMusic
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.ui.graphics.Color
@@ -17,6 +19,7 @@ import com.player.music.mp3.presentation.R
 import com.player.music.mp3.presentation.screens.state.model.IntroPagerModel
 import com.player.music.mp3.presentation.screens.state.model.MusicCategory
 import com.player.music.mp3.presentation.ui.component.bottom.BottomItem
+import com.player.music.mp3.presentation.ui.nav.AllSong
 import com.player.music.mp3.presentation.ui.nav.Favourite
 import com.player.music.mp3.presentation.ui.nav.Home
 import com.player.music.mp3.presentation.ui.nav.Profile
@@ -99,6 +102,12 @@ class AppVM : ViewModel() {
             route = Search.route,
             selectedIcon = Icons.Filled.Search,
             unSelectedIcon = Icons.Outlined.Search
+        ),
+        BottomItem(
+            name = "All Songs",
+            route = AllSong.route,
+            selectedIcon = Icons.Filled.LibraryMusic,
+            unSelectedIcon = Icons.Outlined.LibraryMusic
         ),
         BottomItem(
             name = "Favourite",

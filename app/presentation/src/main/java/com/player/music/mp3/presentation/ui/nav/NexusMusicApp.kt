@@ -15,6 +15,8 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.*
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -64,6 +66,13 @@ fun NexusMusicApp() {
 
     /*Player State*/
     var isPlaying = musicViewModel.isPlayingState.collectAsState().value
+    var hasBeenPlayed by remember { mutableStateOf(false) }
+
+    LaunchedEffect(isPlaying) {
+        if (isPlaying) {
+            hasBeenPlayed = true
+        }
+    }
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -84,22 +93,24 @@ fun NexusMusicApp() {
                     Column(
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        HorizontalDivider()
-                        MiniPlayerBarComp(
-                            image = R.drawable.placeholder_news,
-                            title = "Title",
-                            subTitle = "Sub Title",
-                            isFavorite = false,
-                            isPlaying = isPlaying,
-                            onPlayPauseClick = {
-                                if (isPlaying) {
-                                    musicViewModel.pauseSong()
-                                } else {
-                                    musicViewModel.playSong()
-                                }
-                            },
-                        )
-                        HorizontalDivider()
+                        if (hasBeenPlayed){
+                            HorizontalDivider()
+                            MiniPlayerBarComp(
+                                image = R.drawable.placeholder_news,
+                                title = "Title",
+                                subTitle = "Sub Title",
+                                isFavorite = false,
+                                isPlaying = isPlaying,
+                                onPlayPauseClick = {
+                                    if (isPlaying) {
+                                        musicViewModel.pauseSong()
+                                    } else {
+                                        musicViewModel.playSong()
+                                    }
+                                },
+                            )
+                            HorizontalDivider()
+                        }
                         CustomBottomBar(
                             currentDestination = currentDestination,
                             appViewModel = appViewModel,
